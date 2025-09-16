@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Price Prediction</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f7f7f7; }
+        .container { max-width: 450px; margin: 60px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #bfa14a; }
+        .prediction { font-size: 1.5em; color: #333; text-align: center; margin-top: 20px; }
+        button { background: #bfa14a; color: #fff; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 1em; }
+        button:hover { background: #a68c3c; }
+        .history { margin-top: 30px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background: #f2e6b1; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gold Price Prediction</h1>
+        <form method="post">
+            <label for="spx">SPX:</label>
+            <input type="number" step="any" name="spx" id="spx" required><br><br>
+            <label for="uso">USO:</label>
+            <input type="number" step="any" name="uso" id="uso" required><br><br>
+            <label for="slv">SLV:</label>
+            <input type="number" step="any" name="slv" id="slv" required><br><br>
+            <label for="eurusd">EUR/USD:</label>
+            <input type="number" step="any" name="eurusd" id="eurusd" required><br><br>
+            <button type="submit">Predict Gold Price</button>
+        </form>
+        {% if prediction %}
+            <div class="prediction">Predicted Gold Price: ${{ prediction }}</div>
+        {% endif %}
+        {% if history and history|length > 0 %}
+        <div class="history">
+            <h2>Last Predictions</h2>
+            <table>
+                <tr>
+                    <th>SPX</th>
+                    <th>USO</th>
+                    <th>SLV</th>
+                    <th>EUR/USD</th>
+                    <th>Predicted GLD</th>
+                </tr>
+                {% for item in history %}
+                <tr>
+                    <td>{{ item.spx }}</td>
+                    <td>{{ item.uso }}</td>
+                    <td>{{ item.slv }}</td>
+                    <td>{{ item.eurusd }}</td>
+                    <td>{{ item.prediction }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
